@@ -1,4 +1,4 @@
-import { callFetchAccountAPI } from '@/config/api.fast.js';
+import { callFetchAccountAPI } from '@/apis/api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // First, create the thunk

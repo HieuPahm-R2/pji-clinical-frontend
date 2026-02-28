@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { IRole, IModelPaginate } from '@/types/backend';
-import { callFetchRole, callFetchRoleById } from '@/config/api';
+import { callFetchRole, callFetchRoleById } from '@/apis/api';
 
 
 interface IState {

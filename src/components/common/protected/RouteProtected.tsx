@@ -5,7 +5,7 @@ import { Navigate, useLocation } from "react-router-dom"
 
 const RoleCheck = (props) => {
     const isAdmin = window.location.pathname.startsWith("/admin")
-    const user = useSelector(state => state.account.user)
+    const user = useSelector((state: any) => state.account.user)
     const userRole = user?.role?.name
     console.log(userRole)
     if ((isAdmin && (userRole === 'ADMIN' || userRole === 'DOCTOR' || userRole === 'NURSE' || userRole === 'RECEPTIONIST'))
@@ -17,7 +17,7 @@ const RoleCheck = (props) => {
 }
 
 const ProtectedRoute = (props) => {
-    const isAuthenticated = useSelector(state => state.account.isAuthenticated)
+    const isAuthenticated = useSelector((state: any) => state.account.isAuthenticated)
     const location = useLocation();
     return (
         <>

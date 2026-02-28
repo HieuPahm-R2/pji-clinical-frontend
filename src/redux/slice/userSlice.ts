@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { callFetchUser } from '@/config/api';
+import { callFetchUser } from '@/apis/api';
 import { IModelPaginate, IUser } from '@/types/backend';
 
 interface IState {
