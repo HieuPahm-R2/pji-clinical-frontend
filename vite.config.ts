@@ -1,14 +1,44 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig, loadEnv } from 'vite'
 
+import react from '@vitejs/plugin-react-swc'
+import path from 'path';
+import dns from 'dns';
+
+dns.setDefaultResultOrder('verbatim')
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  // Quan trọng: Thay đổi base thành tên repository của bạn để GitHub Pages load đúng đường dẫn file CSS/JS.
-  // Dựa trên screenshot của bạn: https://hoangtung386.github.io/pji-clinical-decision-support/
-  base: '/pji-clinical-decision-support/',
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-  },
-});
+export default defineConfig(({ command, mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  return {
+    plugins: [
+      react(),
+      // visualizer() as PluginOption
+    ],
+    //Thay đổi base thành tên repository của bạn để GitHub Pages load đúng đường dẫn file CSS/JS.
+    base: '/pji-clinical-decision-support/',
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets',
+    },
+    server: {
+      port: Number(env.PORT) || Number(process.env.PORT) || 5173,
+      strictPort: true
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        define: {
+          global: 'window', // Define 'global' as 'window' for browser compatibility
+        },
+      },
+    },
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src/"),
+        components: `${path.resolve(__dirname, "./src/components/")}`,
+        styles: `${path.resolve(__dirname, "./src/styles/")}`,
+        apis: `${path.resolve(__dirname, "./src/apis/")}`,
+        pages: `${path.resolve(__dirname, "./src/pages/")}`,
+        assets: `${path.resolve(__dirname, "./src/assets/")}`,
+      },
+    },
+  }
+})
