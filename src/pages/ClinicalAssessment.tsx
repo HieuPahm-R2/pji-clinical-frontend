@@ -7,7 +7,6 @@ export const ClinicalAssessmentPage: React.FC = () => {
   const { demographics, setDemographics, clinical, setClinical } = usePatient();
 
   // Logic: ICM 2018 Scoring
-  // Logic: ICM 2018 Scoring
   useEffect(() => {
     if (demographics.surgeryDate && demographics.symptomDate) {
       const surgery = new Date(demographics.surgeryDate);
