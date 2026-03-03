@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Steps, Button } from 'antd';
-import { Step1PatientSelection } from '../../components/user/diagnose_steps/Step1PatientSelection';
-import { PatientIntake } from '../../components/user/rag_diagnose/PatientIntake';
-import { MedicalHistoryPage } from '../../components/user/rag_diagnose/MedicalHistory';
+import { Step1PatientSelection } from '../../components/user/diagnose_steps/S1PatientSelection';
+import { PatientIntake } from '../../components/user/diagnose_steps/S1PatientIntake';
+import { MedicalHistoryPage } from '../../components/user/diagnose_steps/MedicalHistory';
 import { ClinicalAssessmentPage } from '../../components/user/rag_diagnose/ClinicalAssessment';
 import { Step4Antibiogram } from '../../components/user/diagnose_steps/Step4Antibiogram';
-import { Step5TreatmentPlan } from '../../components/user/diagnose_steps/Step5TreatmentPlan';
+import { Step5TreatmentPlan } from '../../components/user/diagnose_steps/S5TreatmentPlan';
 
 const AiDiagnosisSuggestion = () => {
     const [currentStep, setCurrentStep] = useState(() => {

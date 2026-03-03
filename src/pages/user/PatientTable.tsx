@@ -52,9 +52,14 @@ const PatientTable = () => {
             hideInSearch: true,
         },
         {
-            title: "CCCD",
+            title: "Tìm CCCD",
             dataIndex: "indetityCard",
             hidden: true
+        },
+        {
+            title: "SĐT",
+            dataIndex: "phone",
+            sorter: true,
         },
         {
             title: "Họ & Tên",
@@ -64,6 +69,7 @@ const PatientTable = () => {
         {
             title: "id",
             dataIndex: "id",
+            hideInSearch: true,
             hidden: true
         },
         {
@@ -87,11 +93,6 @@ const PatientTable = () => {
             title: "Secret",
             dataIndex: "relativePhone",
             hidden: true
-        },
-        {
-            title: "Số điện thoại",
-            dataIndex: "phone",
-            sorter: true,
         },
         {
             title: "Địa chỉ",
@@ -239,45 +240,7 @@ const PatientTable = () => {
 
     return (
         <div style={{ padding: "0 20px", marginTop: "10px" }}>
-            {/* Header Section */}
-            <div style={{ marginBottom: "24px" }}>
-                <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    marginBottom: "8px"
-                }}>
-                    <UserOutlined style={{ fontSize: "28px", color: "#1890ff" }} />
-                    <h1 style={{
-                        fontSize: "20px",
-                        fontWeight: "600",
-                        margin: "0",
-                        color: "#262626"
-                    }}>
-                        Quản lý danh sách bệnh nhân
-                    </h1>
 
-                </div>
-                <p style={{
-                    marginBottom: "10px",
-                    color: "#8c8c8c",
-                    fontSize: "14px"
-                }}>
-                    Quản lý thông tin và hồ sơ bệnh nhân, cập nhật dữ liệu y tế
-                </p>
-                <Breadcrumb
-                    items={[
-                        {
-                            href: "/",
-                            title: <HomeOutlined />,
-                        },
-                        {
-                            title: "Quản lý bệnh nhân"
-                        }
-                    ]}
-                    style={{ marginBottom: "16px" }}
-                />
-            </div>
 
             {/* DataTable Card */}
             <Card
@@ -286,6 +249,46 @@ const PatientTable = () => {
                     boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02)"
                 }}
             >
+                {/* Header Section */}
+                <div style={{ marginBottom: "24px" }}>
+                    <div style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                        marginBottom: "8px"
+                    }}>
+                        <UserOutlined style={{ fontSize: "28px", color: "#1890ff" }} />
+                        <h1 style={{
+                            fontSize: "20px",
+                            fontWeight: "600",
+                            margin: "0",
+                            color: "#262626"
+                        }}>
+                            Quản lý danh sách bệnh nhân
+                        </h1>
+
+                    </div>
+                    <p style={{
+                        marginBottom: "10px",
+                        color: "#8c8c8c",
+                        fontSize: "14px"
+                    }}>
+                        Quản lý thông tin và hồ sơ bệnh nhân, cập nhật dữ liệu y tế
+                    </p>
+                    <Breadcrumb
+                        items={[
+                            {
+                                href: "/",
+                                title: <HomeOutlined />,
+                            },
+                            {
+                                title: "Quản lý bệnh án"
+                            }
+                        ]}
+                        style={{ marginBottom: "16px" }}
+                    />
+                </div>
+
                 <DataTable<IPatient>
                     actionRef={tableRef}
                     headerTitle="Danh sách bệnh nhân"
