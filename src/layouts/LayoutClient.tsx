@@ -109,7 +109,7 @@ export const LayoutClient = () => {
             <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors border border-transparent hover:border-slate-200">
               <Avatar size="large" icon={<UserOutlined />} className="bg-primary/10 text-primary flex-shrink-0 border border-primary/20 aspect-square" />
               <div className="flex flex-col flex-1 min-w-0">
-                <span className="text-sm font-bold text-slate-900 truncate">
+                <span className="text-lg font-bold text-slate-900 truncate">
                   {'Phạm Trung Hiếu'}
                 </span>
                 <span className="text-xs font-medium text-slate-500 truncate">

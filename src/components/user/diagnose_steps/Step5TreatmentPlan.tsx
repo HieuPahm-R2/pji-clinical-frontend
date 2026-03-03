@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Input } from 'antd';
 import { SendOutlined, InfoCircleOutlined, DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { usePatient } from '../../../context/PatientContext';
+import SurgerySection from '../rag_diagnose/rag_surgery/SurgerySection';
 
 interface Step5Props {
     onPrev: () => void;
@@ -120,63 +121,10 @@ export const Step5TreatmentPlan: React.FC<Step5Props> = ({ onPrev }) => {
 
                             </div>
                         </div>
-                        {/* Section: Surgery */}
-                        <div className="border border-slate-300 rounded-lg p-3">
-                            <div className="flex items-center gap-2 mb-3 text-slate-900 font-bold border-b border-slate-700 pb-2">
-                                <span className="material-symbols-outlined text-[18px]">surgical</span> PHẪU THUẬT
-                            </div>
-                            <div className="space-y-2">
-                                <div className="flex justify-between items-center hover:bg-slate-700/50 p-2 rounded group">
-                                    <span className="text-sm"><span className="text-blue-400 font-mono mr-2">Bước 1:</span>Tháo khớp + đặt spacer</span>
-                                    <div className="hidden group-hover:flex gap-2">
-                                        <EditOutlined className="text-yellow-500 hover:text-yellow-400 cursor-pointer" />
-                                        <DeleteOutlined className="text-red-500 hover:text-red-400 cursor-pointer" />
-                                    </div>
-                                </div>
-                                <div className="flex justify-between items-center hover:bg-slate-700/50 p-2 rounded group">
-                                    <span className="text-sm"><span className="text-blue-400 font-mono mr-2">Bước 2:</span>Thay khớp lại (tuần 8+)</span>
-                                    <div className="hidden group-hover:flex gap-2">
-                                        <EditOutlined className="text-yellow-500 hover:text-yellow-400 cursor-pointer" />
-                                        <DeleteOutlined className="text-red-500 hover:text-red-400 cursor-pointer" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="mt-3 flex justify-end">
-                                <span className="text-xs text-slate-500 hover:text-white cursor-pointer transition-colors flex items-center gap-1">
-                                    [+ Thêm bước]
-                                </span>
-                            </div>
-                        </div>
+
 
                         {/* Section: Systemic Antibiotics */}
-                        <div className="border-l-2 border-green-500 border-t border-r border-b border-slate-700 rounded-lg p-3 bg-slate-800 /80">
-                            <div className="flex items-center gap-2 mb-3 text-green-400 font-bold border-b border-slate-700 pb-2">
-                                <span className="material-symbols-outlined text-[18px]">vaccines</span> KHÁNG SINH TOÀN THÂN
-                            </div>
-                            <div className="space-y-2">
-                                <div className="flex justify-between items-center hover:bg-slate-700/50 p-2 rounded group">
-                                    <span className="text-sm"><span className="text-slate-500 mr-2">1.</span>Daptomycin 6mg/kg IV</span>
-                                    <div className="hidden group-hover:flex gap-3">
-                                        <EditOutlined className="text-yellow-500 hover:text-yellow-400 cursor-pointer" />
-                                        <DeleteOutlined className="text-red-500 hover:text-red-400 cursor-pointer" />
-                                        <span className="material-symbols-outlined text-[16px] text-blue-400 cursor-pointer" title="Hỏi AI tại sao">sms</span>
-                                    </div>
-                                </div>
-                                <div className="flex justify-between items-center hover:bg-slate-700/50 p-2 rounded group">
-                                    <span className="text-sm"><span className="text-slate-500 mr-2">2.</span>Rifampin + Cipro PO</span>
-                                    <div className="hidden group-hover:flex gap-3">
-                                        <EditOutlined className="text-yellow-500 hover:text-yellow-400 cursor-pointer" />
-                                        <DeleteOutlined className="text-red-500 hover:text-red-400 cursor-pointer" />
-                                        <span className="material-symbols-outlined text-[16px] text-blue-400 cursor-pointer" title="Hỏi AI tại sao">sms</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="mt-3 flex justify-end">
-                                <span className="text-xs text-slate-500 hover:text-white cursor-pointer transition-colors flex items-center gap-1">
-                                    [+ Thêm thuốc]
-                                </span>
-                            </div>
-                        </div>
+                        <SurgerySection />
 
                         {/* Section: Local Antibiotics */}
                         <div className="border border-slate-700 rounded-lg p-3">
@@ -198,65 +146,71 @@ export const Step5TreatmentPlan: React.FC<Step5Props> = ({ onPrev }) => {
                     </div>
                 </div>
 
-                {/* Right Panel: AI Chat */}
-
-                <div className="w-96 bg-slate-800 border border-slate-700 rounded-xl flex flex-col overflow-hidden shadow-2xl">
-                    <div className="bg-slate-50 rounded-xl border border-slate-200 flex flex-col ">
-                        <div className="p-4 border-b border-slate-200 flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <span className="material-symbols-outlined text-purple-600">smart_toy</span>
-                                <h3 className="font-bold text-slate-900 text-sm">Cơ sở bằng chứng (RAG)</h3>
-                            </div>
-                            <span className="text-[10px] font-bold uppercase bg-purple-100 text-purple-700 px-2 py-0.5 rounded">Tạo bởi AI</span>
-                        </div>
-                        <div className="p-5 flex-1 space-y-4">
-                            <div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Trích dẫn hướng dẫn</p>
-                                <blockquote className="text-sm text-slate-700 italic border-l-2 border-primary pl-3 leading-relaxed">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro modi cupiditate sunt maiores? Impedit ratione enim magnam vel! Dolores, veniam? Non blanditiis veniam adipisci, quos amet ad earum aliquam alias.
-                                </blockquote>
-                                <div className="mt-2 flex items-center gap-1.5">
-                                    <span className="material-symbols-outlined text-xs text-slate-400">menu_book</span>
-                                    <a href="#" className="text-xs font-medium text-primary hover:underline">Hướng dẫn đồng thuận ICM 2018</a>
+                {/* Right Panel: AI Chat & Evidence */}
+                <div className="w-96 flex flex-col gap-4 h-full">
+                    {/* Evidence block */}
+                    <div className="bg-slate-800 border border-slate-700 rounded-xl flex flex-col overflow-hidden shadow-2xl">
+                        <div className="bg-slate-50 rounded-xl border border-slate-200 flex flex-col ">
+                            <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-purple-600">smart_toy</span>
+                                    <h3 className="font-bold text-slate-900 text-sm">Cơ sở bằng chứng (RAG)</h3>
                                 </div>
+                                <span className="text-[10px] font-bold uppercase bg-purple-100 text-purple-700 px-2 py-0.5 rounded">Tạo bởi AI</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className="p-4 border-b border-slate-700 flex items-center gap-2 bg-slate-800/50">
-                        <span className="material-symbols-outlined text-blue-400">forum</span>
-                        <h3 className="font-bold text-slate-100">Hỏi AI về phác đồ</h3>
-                    </div>
-
-                    <div className="flex-1 overflow-y-auto p-4 space-y-4 text-sm font-mono">
-                        {/* User message */}
-                        <div className="flex flex-col gap-1 items-end">
-                            <span className="text-xs text-slate-400">Dr. Nam:</span>
-                            <div className="bg-slate-700 text-green-400 p-2.5 rounded-lg rounded-tr-none max-w-[85%] border border-green-900/50">
-                                "Sao không DAIR?"
-                            </div>
-                        </div>
-
-                        {/* AI response */}
-                        <div className="flex flex-col gap-1 items-start">
-                            <span className="text-xs text-primary font-bold flex items-center gap-1">
-                                <span className="material-symbols-outlined text-[14px]">auto_awesome</span> AI:
-                            </span>
-                            <div className="bg-slate-700/50 border-l-2 border-green-500 text-slate-300 p-3 rounded-r-lg rounded-bl-lg max-w-[90%] space-y-2">
-                                <p className="text-green-300 font-sans leading-relaxed">"DAIR không phù hợp vì onset LATE {'>'} 3 tháng. Theo guideline, việc giữ lại khớp nhân tạo có tỉ lệ thất bại rất cao đối với nhiễm trùng mạn tính."</p>
-                                <div className="bg-slate-800/80 p-2 rounded border border-slate-600 flex items-center gap-2 mt-2">
-                                    <InfoCircleOutlined className="text-slate-400" />
-                                    <span className="text-xs text-slate-400">ICM 2018 §6.2</span>
+                            <div className="p-5 flex-1 space-y-4">
+                                <div>
+                                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Trích dẫn hướng dẫn</p>
+                                    <blockquote className="text-sm text-slate-700 italic border-l-2 border-primary pl-3 leading-relaxed">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro modi cupiditate sunt maiores? Impedit ratione enim magnam vel! Dolores, veniam? Non blanditiis veniam adipisci, quos amet ad earum aliquam alias.
+                                    </blockquote>
+                                    <div className="mt-2 flex items-center gap-1.5">
+                                        <span className="material-symbols-outlined text-xs text-slate-400">menu_book</span>
+                                        <a href="#" className="text-xs font-medium text-primary hover:underline">Hướng dẫn đồng thuận ICM 2018</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="p-3 border-t border-slate-700 bg-slate-800">
-                        <Input
-                            placeholder="[Hỏi tiếp...]"
-                            className="bg-slate-900 border-slate-700 text-slate-200 placeholder-slate-500 font-mono p-2 hover:border-slate-500 focus:border-green-500"
-                            suffix={<SendOutlined className="text-slate-500 hover:text-green-400 cursor-pointer" />}
-                        />
+                    {/* Chat block */}
+                    <div className="bg-slate-800 border border-slate-700 rounded-xl flex flex-col flex-1 overflow-hidden shadow-2xl">
+                        <div className="p-4 border-b border-slate-700 flex items-center gap-2 bg-slate-800/50">
+                            <span className="material-symbols-outlined text-blue-400">forum</span>
+                            <h3 className="font-bold text-slate-100">Hỏi AI về phác đồ</h3>
+                        </div>
+
+                        <div className="flex-1 overflow-y-auto p-4 space-y-4 text-sm font-mono">
+                            {/* User message */}
+                            <div className="flex flex-col gap-1 items-end">
+                                <span className="text-xs text-slate-400">Dr. Nam:</span>
+                                <div className="bg-slate-700 text-green-400 p-2.5 rounded-lg rounded-tr-none max-w-[85%] border border-green-900/50">
+                                    "Sao không DAIR?"
+                                </div>
+                            </div>
+
+                            {/* AI response */}
+                            <div className="flex flex-col gap-1 items-start">
+                                <span className="text-xs text-primary font-bold flex items-center gap-1">
+                                    <span className="material-symbols-outlined text-[14px]">auto_awesome</span> AI:
+                                </span>
+                                <div className="bg-slate-700/50 border-l-2 border-green-500 text-slate-300 p-3 rounded-r-lg rounded-bl-lg max-w-[90%] space-y-2">
+                                    <p className="text-green-300 font-sans leading-relaxed">"DAIR không phù hợp vì onset LATE {'>'} 3 tháng. Theo guideline, việc giữ lại khớp nhân tạo có tỉ lệ thất bại rất cao đối với nhiễm trùng mạn tính."</p>
+                                    <div className="bg-slate-800/80 p-2 rounded border border-slate-600 flex items-center gap-2 mt-2">
+                                        <InfoCircleOutlined className="text-slate-400" />
+                                        <span className="text-xs text-slate-400">ICM 2018 §6.2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="p-3 border-t border-slate-700 bg-slate-800">
+                            <Input
+                                placeholder="[Hỏi tiếp...]"
+                                className="bg-slate-200 border-slate-700 text-slate-900 placeholder-slate-500 font-mono p-2 hover:border-slate-500 focus:border-green-500"
+                                suffix={<SendOutlined className="text-slate-900 hover:text-green-400 cursor-pointer" />}
+                            />
+                        </div>
                     </div>
                 </div>
 
