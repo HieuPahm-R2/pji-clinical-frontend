@@ -205,6 +205,7 @@ export const Step5TreatmentPlan: React.FC<Step5Props> = ({ onPrev }) => {
     return (
         <div className="flex flex-col h-full relative">
             <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between z-10 flex-shrink-0">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
                 <div>
                     <h1 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
                         <span className="material-symbols-outlined text-green-400">psychology</span>
