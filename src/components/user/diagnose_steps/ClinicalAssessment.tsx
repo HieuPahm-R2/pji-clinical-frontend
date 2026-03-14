@@ -95,19 +95,24 @@ export const ClinicalAssessmentPage: React.FC<ClinicalAssessmentProps> = ({ onNe
     <>
       <header className="flex-shrink-0 bg-white border-b border-slate-200 px-8 py-5 flex items-center justify-between z-10">
         <div>
-          <div className="flex items-baseline gap-3">
-            <span className="text-slate-400 text-sm font-mono bg-slate-100 px-2 py-0.5 rounded">Dữ liệu xét nghiệm</span>
-          </div>
-          <p className="text-slate-500 text-sm mt-1 flex items-center gap-2">
+          <div className="flex items-center gap-3">
 
-            <span className="material-symbols-outlined text-sm">accessibility_new</span> Vị trí: {demographics.implantType} ({demographics.implantNature})
-          </p>
+            <span className="text-slate-800 text-md font-mono bg-slate-100 px-2 py-0.5 rounded">Dữ liệu xét nghiệm</span>
+          </div>
+          <button className="text-slate-900 bg-green-400 mt-1 flex items-center gap-2 rounded font-mono px-2 py-1 font-bold hover:bg-cyan-400">
+            <span className="material-symbols-outlined text-md">accessibility_new</span>
+            Import nhanh
+          </button>
         </div>
         <div className="flex items-center gap-3 z-10">
-          <button onClick={onPrev} className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors bg-red-300 border border-slate-200 rounded-lg">Quay lại</button>
-          <button onClick={onNext} className="flex items-center justify-center gap-2 px-5 h-10 bg-primary hover:bg-primary-dark text-white font-bold text-md rounded-lg shadow-md transition-all">
-            Tiếp tục <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+          <button onClick={onPrev} className="px-6 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-2 border border-slate-200 rounded-lg bg-red-300">
+            <span className="material-symbols-outlined text-[18px]">arrow_back</span> Quay lại
           </button>
+          <div className="flex gap-3">
+            <button onClick={onNext} className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3  font-bold text-white hover:bg-cyan-600 shadow-lg shadow-blue-500/20 transition-all active:scale-95">
+              Tiếp tục
+            </button>
+          </div>
         </div>
       </header>
 
@@ -126,14 +131,15 @@ export const ClinicalAssessmentPage: React.FC<ClinicalAssessmentProps> = ({ onNe
                     Triệu chứng & Khám lâm sàng
                   </h3>
                 </div>
-                <div className="p-6 grid grid-cols-2 lg:grid-cols-5 gap-4">
+                <div className="p-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {[
                     { key: 'fever', label: 'Sốt' },
                     { key: 'sinusTract', label: 'Đường rò' },
                     { key: 'erythema', label: 'Tấy đỏ' },
                     { key: 'pain', label: 'Đau' },
                     { key: 'swelling', label: 'Sưng nề' },
-
+                    { key: 'pmmaAllergy', label: 'Dị ứng PMMA' },
+                    { key: 'hematogenousSuspected', label: 'Nhiễm trùng huyết' },
                   ].map((item) => (
                     <label key={item.key} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-colors cursor-pointer">
                       <input
@@ -188,47 +194,50 @@ export const ClinicalAssessmentPage: React.FC<ClinicalAssessmentProps> = ({ onNe
                   </label>
 
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-sm font-medium text-slate-700">Mạch (lần/ph)</span>
-                    <input
-                      type="number"
-                      placeholder="Ví dụ: 84"
-                      value={clinical.examination?.vessel !== undefined ? clinical.examination.vessel : ''}
-                      onChange={(e) => setClinical(prev => ({ ...prev, examination: { ...prev.examination, vessel: e.target.value ? Number(e.target.value) : '' } as any }))}
-                      className="w-full rounded-lg border-slate-300 h-11 px-3 border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-                    />
-                  </label>
-                  <label className="flex flex-col gap-1.5">
-                    <span className="text-sm font-medium text-slate-700">Nhiệt độ (°C)</span>
-                    <input
-                      type="number"
-                      step="0.1"
-                      placeholder="Ví dụ: 36.8"
-                      value={clinical.examination?.temperature !== undefined ? clinical.examination.temperature : ''}
-                      onChange={(e) => setClinical(prev => ({ ...prev, examination: { ...prev.examination, temperature: e.target.value ? Number(e.target.value) : '' } as any }))}
-                      className="w-full rounded-lg border-slate-300 h-11 px-3 border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-                    />
-                  </label>
-                  <label className="flex flex-col gap-1.5">
-                    <span className="text-sm font-medium text-slate-700">Huyết áp (mmHg)</span>
+                    <span className="text-sm font-medium text-slate-700">Loại nhiễm trùng nghi ngờ</span>
                     <input
                       type="text"
-                      placeholder="Ví dụ: 140/95"
-                      value={clinical.examination?.blood_press || ''}
-                      onChange={(e) => setClinical(prev => ({ ...prev, examination: { ...prev.examination, blood_press: e.target.value } as any }))}
+                      placeholder="Ví dụ: cấp tính sau phẫu thuật"
+                      className="w-full rounded-lg border-slate-300 h-11 px-3 border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                    />
+                  </label>
+
+                  <label className="flex flex-col gap-1.5">
+                    <span className="text-sm font-medium text-slate-700">Tình trạng mô mềm</span>
+                    <input
+                      type="text"
+                      placeholder="Ví dụ:"
                       className="w-full rounded-lg border-slate-300 h-11 px-3 border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                     />
                   </label>
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-sm font-medium text-slate-700">Nhịp thở (lần/ph)</span>
+                    <span className="text-sm font-medium text-slate-700">Độ ổn định cấy ghép</span>
+                    <select id="countries" className="w-full rounded-lg border-slate-300 h-11 px-3 focus:ring-primary focus:border-primary border">
+                      <option disabled selected>Chọn tình trạng</option>
+                      <option value="BHYT">Ổn định</option>
+                      <option value="DICHVU">Lỏng lẻo</option>
+                      <option value="FREE">Hơi lỏng lẻo</option>
+                      <option value="OTHER">Chưa rõ</option>
+                    </select>
+                  </label>
+                  <label className="flex flex-col gap-1.5">
+                    <span className="text-sm font-medium text-slate-700">số ngày từ lần thay khớp đầu</span>
                     <input
                       type="number"
-                      placeholder="Ví dụ: 17"
-                      value={clinical.examination?.breath !== undefined ? clinical.examination.breath : ''}
-                      onChange={(e) => setClinical(prev => ({ ...prev, examination: { ...prev.examination, breath: e.target.value ? Number(e.target.value) : '' } as any }))}
+                      placeholder="Ví dụ: 70"
                       className="w-full rounded-lg border-slate-300 h-11 px-3 border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                     />
                   </label>
-                  <label className="flex flex-col col-span-3">
+                  <label className="flex flex-col col-span-3 gap-1.5">
+                    <span className="text-sm font-medium text-slate-700">Khớp nhân tạo</span>
+                    <input
+                      type="text"
+                      placeholder="Ví du: Miêu tả về vị trí khớp, có phải mổ lại không, phương pháp cố định..."
+                      className="w-full rounded-lg border-slate-300 h-11 px-3 border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                    />
+                  </label>
+
+                  <label className="flex flex-col col-span-3 gap-1.5">
                     <span className="text-sm font-medium text-slate-700">Khám bệnh toàn thân</span>
                     <input
                       type="text"
@@ -334,8 +343,50 @@ export const ClinicalAssessmentPage: React.FC<ClinicalAssessmentProps> = ({ onNe
                                 type="text"
                                 value={test.result}
                                 onChange={(e) => {
-                                  const newTests = [...clinical.biochemistryTests];
-                                  newTests[index].result = e.target.value;
+                                  let newTests = [...clinical.biochemistryTests];
+                                  const newValue = e.target.value;
+                                  newTests[index].result = newValue;
+                                  console.log('newTests', newTests);
+                                  // If the user is modifying Creatinine (bc_6), auto-calculate eGFR (ht_20)
+                                  if (test.id === 'bc_6') {
+                                    const egfrIndex = newTests.findIndex(t => t.id === 'ht_20');
+                                    console.log('egfrIndex', egfrIndex);
+                                    if (egfrIndex !== -1) {
+                                      if (!newValue || isNaN(Number(newValue))) {
+                                        newTests[egfrIndex].result = '';
+                                      } else {
+                                        let age = 0;
+                                        if (demographics.dob) {
+                                          const dobDate = new Date(demographics.dob);
+                                          const today = new Date();
+                                          age = today.getFullYear() - dobDate.getFullYear();
+                                          const m = today.getMonth() - dobDate.getMonth();
+                                          if (m < 0 || (m === 0 && today.getDate() < dobDate.getDate())) {
+                                            age--;
+                                          }
+                                        }
+
+                                        if (age > 0) {
+                                          const scrUmolL = Number(newValue);
+                                          const scr = scrUmolL / 88.4; // µmol/L to mg/dL
+
+                                          const isFemale = demographics.gender === 'female';
+                                          const k = isFemale ? 0.7 : 0.9;
+                                          const alpha = isFemale ? -0.241 : -0.302;
+
+                                          const scrDivK = scr / k;
+                                          const minVal = Math.min(scrDivK, 1);
+                                          const maxVal = Math.max(scrDivK, 1);
+
+                                          let egfr = 142 * Math.pow(minVal, alpha) * Math.pow(maxVal, -1.200) * Math.pow(0.9938, age);
+                                          if (isFemale) egfr = egfr * 1.012;
+
+                                          newTests[egfrIndex].result = Math.round(egfr).toString();
+                                        }
+                                      }
+                                    }
+                                  }
+
                                   setClinical(prev => ({ ...prev, biochemistryTests: newTests }));
                                 }}
                                 className="w-full h-full px-4 py-2 border-none bg-transparent focus:ring-inset focus:ring-2 focus:ring-primary outline-none"
@@ -672,93 +723,7 @@ export const ClinicalAssessmentPage: React.FC<ClinicalAssessmentProps> = ({ onNe
 
             </div>
 
-            {/* RIGHT COLUMN: AI DIAGNOSIS */}
-            <div className="sticky top-6 lg:col-span-5 xl:col-span-4 h-full relative">
-              <div className="flex flex-col gap-6">
 
-                {/* Main AI Card */}
-                <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden relative">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-yellow-400 to-red-500"></div>
-                  <div className="p-6">
-                    <div className="flex justify-between items-start mb-6">
-                      <div>
-                        <h3 className="text-slate-900 font-bold text-lg">Công cụ chẩn đoán AI</h3>
-                        <p className="text-slate-500 text-xs">Phân tích đa mô thức thông minh</p>
-                      </div>
-                      <button
-                        onClick={handleAIPredict}
-                        disabled={isAILoading}
-                        className="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-3 py-1.5 rounded-lg text-md font-semibold transition-all shadow-sm disabled:opacity-50"
-                      >
-                        {isAILoading ? (
-                          <span className="material-symbols-outlined animate-spin text-[18px]">autorenew</span>
-                        ) : (
-                          <span className="material-symbols-outlined text-[18px]">online_prediction</span>
-                        )}
-                        {isAILoading ? 'Đang xử lý...' : 'Dự đoán AI'}
-                      </button>
-                    </div>
-
-                    {/* Gauge */}
-                    <div className="flex flex-col items-center justify-center py-4 relative">
-                      <div className="relative h-48 w-48">
-                        <svg className="h-full w-full -rotate-90" viewBox="0 0 36 36">
-                          <path className="text-slate-100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3.5" />
-                          <path
-                            className={`${getStatusColor(clinical.diagnosis.status)} transition-all duration-1000 ease-out`}
-                            strokeDasharray={`${clinical.diagnosis.probability}, 100`}
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeWidth="3.5"
-                          />
-                        </svg>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <span className="text-4xl font-black text-slate-900 tracking-tighter">{Math.round(clinical.diagnosis.probability)}%</span>
-                          <span className="text-xs font-bold text-slate-400 uppercase tracking-wide mt-1">Xác suất</span>
-                        </div>
-                      </div>
-                      <div className="mt-4 flex flex-col items-center gap-2">
-                        <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border bg-opacity-10 ${clinical.diagnosis.status === 'Infected' ? 'bg-red-500 border-red-200' : 'bg-green-500 border-green-200'}`}>
-                          <span className={`text-sm font-bold ${getStatusColor(clinical.diagnosis.status)}`}>{getStatusTextDetailed(clinical.diagnosis.status)}</span>
-                        </div>
-                        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-600 text-xs font-semibold border border-slate-200">
-                          <span className="material-symbols-outlined text-[14px]">timelapse</span>
-                          {demographics.isAcute ? 'Nhiễm trùng cấp tính (< 3 tuần)' : 'Nhiễm trùng mãn tính (> 3 tuần)'}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* RAG Reasoning Box */}
-                  <div className="bg-slate-50 p-6 border-t border-slate-100">
-                    <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2 mb-4">
-                      <span className="material-symbols-outlined text-primary text-base">psychology</span>
-                      Lập luận của AI
-                    </h4>
-                    <div className="space-y-4">
-                      {clinical.diagnosis.reasoning.map((text, idx) => (
-                        <div key={idx} className="flex gap-3 items-start">
-                          <div className="mt-1 min-w-4 w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                          </div>
-                          <p className="text-sm text-slate-600 leading-relaxed">{text}</p>
-                        </div>
-                      ))}
-                      {clinical.diagnosis.reasoning.length === 0 && <p className="text-sm text-slate-400 italic">Chưa có tiêu chuẩn đáng kể nào.</p>}
-                    </div>
-                    <div className="mt-5 pt-4 border-t border-slate-200">
-                      <button className="text-xs text-primary font-medium hover:underline flex items-center gap-1">
-                        Xem tham chiếu Hướng dẫn ICM 2018
-                        <span className="material-symbols-outlined text-[14px]">open_in_new</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
           </div>
         </div>
       </div >
